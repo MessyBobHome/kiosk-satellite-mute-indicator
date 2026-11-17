@@ -4,6 +4,8 @@
 
 A [Kiosk Satellite](https://github.com/jxlarrea/kiosk-satellite) plugin that shows when your kiosk's microphone is muted, so you can tell from across the room, even while the screensaver is up.
 
+> **🤖 AI disclosure:** This plugin was developed with substantial help from AI (Anthropic's Claude), which wrote most of the code, documentation and artwork under my direction. Please review it before installing, and report any issues you find.
+
 - **A mute symbol** that you can place anywhere on the screen and size, with your own colour, opacity and an optional background.
 - **A red glow** that fades in from one edge, all four edges or a corner, with its own size, colour and opacity.
 - **Either or both** at once.
@@ -32,14 +34,14 @@ A [Kiosk Satellite](https://github.com/jxlarrea/kiosk-satellite) plugin that sho
 
 Mute Indicator is listed in [Community Plugins](https://kiosksatellite.com/plugins/). Use the button below to open it in your Kiosk Satellite and install it.
 
-[![Install in Kiosk Satellite](https://kiosksatellite.com/img/badges/plugin-add.svg)](https://kiosksatellite.com/redirect/plugin/?repository=MessyBobHome/kiosk-satellite-mute-indicator)
+[![Install in Kiosk Satellite](https://kiosksatellite.com/img/badges/plugin-add.svg)](https://kiosksatellite.com/redirect/plugin/?repository=YOUR_GITHUB_USER/kiosk-satellite-mute-indicator)
 
 Or search for `Mute Indicator` in **Settings > Plugin Manager > Browse plugins** in Kiosk Satellite.
 
 ### Manual
 
 1. Open **Settings > Plugin Manager** in Kiosk Satellite and turn on **Enable Plugins**.
-2. Choose **Add plugin**, paste `https://github.com/MessyBobHome/kiosk-satellite-mute-indicator` and choose **Preview**.
+2. Choose **Add plugin**, paste `https://github.com/YOUR_GITHUB_USER/kiosk-satellite-mute-indicator` and choose **Preview**.
 3. Review the plugin and choose **Trust and install**.
 
 New plugins start switched off, so turn it on afterwards. To try a local build instead, use **Plugin Manager > Developer Tools > Install from ZIP** with the ZIP from `dist/`. See [Build from source](#build-from-source).
@@ -140,35 +142,10 @@ python3 tools/build.py --android-platform 35
 
 The installable ZIP is written to `dist/`. To check that the bundled SDK interfaces still match Kiosk Satellite, run `python3 tools/check-sdk.py /path/to/kiosk-satellite`.
 
-## Publish a release
-
-Kiosk Satellite installs plugins only from release files that GitHub Actions built, so never attach files by hand.
-
-1. Commit your changes and push them to GitHub.
-2. Create a release with a tag such as `v1.0.0`, and publish it as the latest release (not a draft or prerelease).
-3. The included workflow tests and builds the plugin and attaches the ZIP, its checksum and the manifest to the release.
-
-The tag sets the version, so you don't need to edit it in `kiosk-satellite-plugin.json`.
-
-### Submit to Community Plugins
-
-Once a release is published:
-
-1. Run the same check the submission runs, from a clone of [kiosk-satellite-plugins](https://github.com/jxlarrea/kiosk-satellite-plugins):
-
-    ```sh
-    python3 tools/community_plugins.py check https://github.com/MessyBobHome/kiosk-satellite-mute-indicator
-    ```
-
-2. Open a [Submit a plugin](https://github.com/jxlarrea/kiosk-satellite-plugins/issues/new?template=submit-plugin.yml) issue from the account that owns this repository and paste the repository URL.
-3. Fix anything the check reports, then edit the issue to run it again. A maintainer reviews the code before it's listed.
-
 ## Credits and license
 
 - Built on the [Kiosk Satellite plugin SDK](https://github.com/jxlarrea/kiosk-satellite-plugins) by Javier Larrea. The SDK interfaces in `sdk/` and the tools in `tools/` are Apache-2.0.
 - The microphone-off symbol in the artwork is from [Material Design Icons](https://pictogrammers.com/library/mdi/) by Pictogrammers, Apache-2.0. On the kiosk, the plugin draws icons from Kiosk Satellite's own icon set.
 - `docs/art/make_art.py` regenerates the artwork with `rsvg-convert`.
-
-AI disclosure: This plugin was developed with substantial help from AI (Anthropic’s Claude), which wrote most of the code, documentation and artwork under my direction. I have reviewed and tested it, but please report any issues you find.
 
 Mute Indicator is released under the [Apache License 2.0](LICENSE).
