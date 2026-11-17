@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "id": "mute-indicator",
+  "name": "Mute Indicator",
+  "version": "1.0.1",
+  "apiVersion": 1,
+  "minAndroidSdk": 24,
+  "minAppVersion": "2026.10.40",
+  "entryClass": "ks.muteindicator.MuteIndicatorPlugin",
+  "description": "See at a glance when your kiosk's microphone is muted, even on the screensaver. Show a mute symbol, a red glow that fades in from the edges or corners, or both, each with its own position, size, colour and opacity. Follows the kiosk's own Voice Satellite mute by default, so it keeps working when Home Assistant is offline, or any Home Assistant entity you choose. Touches always pass straight through.",
+  "author": "MessyBob",
+  "license": "Apache-2.0",
+  "capabilities": [
+    "overlay",
+    "host.read"
+  ],
+  "icon": "icon.png",
+  "settings": [
+    {
+      "key": "source",
+      "type": "select",
+      "title": "Follow",
+      "default": "This kiosk",
+      "options": ["This kiosk", "Home Assistant entity"],
+      "group": "Mute source",
+      "description": "This kiosk follows Voice Satellite's microphone mute directly. It is the same mute as the kiosk's VS Mute switch in Home Assistant, and it keeps working when Home Assistant is offline. Choose Home Assistant entity to follow any entity instead."
+    },
+    {
+      "key": "entity",
+      "type": "entity",
+      "title": "Entity",
+      "default": "",
+      "includeHidden": true,
+      "group": "Mute source",
+      "description": "The entity that says whether the kiosk is muted, such as switch.echo_show_8_vs_mute.",
+      "visibleWhen": { "key": "source", "equals": "Home Assistant entity" }
+    },
+    {
+      "key": "mutedStates",
+      "type": "string",
+      "title": "Muted when the state is",
+      "default": "on",
+      "group": "Mute source",
+      "description": "The state that means muted. Separate several with commas, such as on, muted. Unknown and unavailable never count as muted.",
+      "visibleWhen": { "key": "source", "equals": "Home Assistant entity" }
+    },
+    {
+      "key": "style",
+      "type": "select",
+      "title": "Indicator",
+      "default": "Icon",
+      "options": ["Icon", "Gradient", "Icon and gradient"],
+      "group": "Indicator",
+      "description": "A mute symbol, a coloured glow from the screen's edges or corners, or both."
+    },
+    {
+      "key": "showOn",
+      "type": "select",
+      "title": "Show",
+      "default": "Everywhere",
+      "options": ["Everywhere", "Only on the screensaver", "Only when the screensaver is off"],
+      "group": "Indicator",
+      "description": "Everywhere covers the dashboard, the screensaver, the menu and camera views."
+    },
+    {
+      "key": "fadeDuration",
+      "type": "number",
+      "title": "Fade in and out (ms)",
+      "default": 400,
+      "min": 50,
+      "max": 1000,
+      "step": 50,
+      "group": "Indicator",
+      "description": "How long the indicator takes to fade in when the kiosk is muted and to fade out when it is unmuted."
+    },
+    {
+      "key": "pulse",
+      "type": "boolean",
+      "title": "Pulse while muted",
+      "default": false,
+      "group": "Indicator",
+      "description": "Gently pulse the indicator instead of holding it steady. Pulsing redraws the screen continuously, which uses more power on slower devices."
+    },
+    {
+      "key": "previewWhileEditing",
+      "type": "boolean",
+      "title": "Preview while editing",
+      "default": true,
+      "group": "Indicator",
+      "description": "Show the indicator for 15 seconds when you open these settings, on the kiosk or in Remote Admin, and again after each change, so you can see the result. It hides on its own, and at once when you close the page."
+    },
+    {
+      "key": "icon",
+      "type": "icon",
+      "title": "Symbol",
+      "default": "mdi:microphone-off",
+      "group": "Icon",
+      "description": "Any Material Design Icon.",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconPosition",
+      "type": "select",
+      "title": "Position",
+      "default": "Top right",
+      "options": ["Top left", "Top center", "Top right", "Middle left", "Center", "Middle right", "Bottom left", "Bottom center", "Bottom right"],
+      "group": "Icon",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconSize",
+      "type": "number",
+      "title": "Size (dp)",
+      "default": 56,
+      "min": 16,
+      "max": 320,
+      "step": 4,
+      "group": "Icon",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconMargin",
+      "type": "number",
+      "title": "Distance from the edge (dp)",
+      "default": 24,
+      "min": 0,
+      "max": 300,
+      "step": 2,
+      "group": "Icon",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconOffsetX",
+      "type": "number",
+      "title": "Move right (dp)",
+      "default": 0,
+      "min": -1000,
+      "max": 1000,
+      "step": 2,
+      "group": "Icon",
+      "description": "Fine-tune the position. Negative moves left. The icon always stays on screen.",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconOffsetY",
+      "type": "number",
+      "title": "Move down (dp)",
+      "default": 0,
+      "min": -1000,
+      "max": 1000,
+      "step": 2,
+      "group": "Icon",
+      "description": "Fine-tune the position. Negative moves up. The icon always stays on screen.",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconColor",
+      "type": "color",
+      "title": "Colour",
+      "default": "#FF3B30",
+      "group": "Icon",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconOpacity",
+      "type": "number",
+      "title": "Opacity (%)",
+      "default": 100,
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "group": "Icon",
+      "description": "Applies to the symbol and its background together.",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconBackground",
+      "type": "select",
+      "title": "Background",
+      "default": "Circle",
+      "options": ["Circle", "Rounded square", "None"],
+      "group": "Icon",
+      "description": "A shape behind the symbol keeps it readable over photos and bright dashboards.",
+      "visibleWhen": { "key": "style", "notEquals": "Gradient" }
+    },
+    {
+      "key": "iconBackgroundColor",
+      "type": "color",
+      "title": "Background colour",
+      "default": "#000000",
+      "group": "Icon",
+      "visibleWhen": { "key": "iconBackground", "notEquals": "None" }
+    },
+    {
+      "key": "iconBackgroundOpacity",
+      "type": "number",
+      "title": "Background opacity (%)",
+      "default": 55,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "group": "Icon",
+      "visibleWhen": { "key": "iconBackground", "notEquals": "None" }
+    },
+    {
+      "key": "gradientPosition",
+      "type": "select",
+      "title": "Position",
+      "default": "All edges",
+      "options": ["Top edge", "Bottom edge", "Left edge", "Right edge", "All edges", "Top left corner", "Top right corner", "Bottom left corner", "Bottom right corner"],
+      "group": "Gradient",
+      "description": "Where the glow starts. It is strongest there and fades to clear.",
+      "visibleWhen": { "key": "style", "notEquals": "Icon" }
+    },
+    {
+      "key": "gradientSize",
+      "type": "number",
+      "title": "Size (dp)",
+      "default": 120,
+      "min": 20,
+      "max": 800,
+      "step": 10,
+      "group": "Gradient",
+      "description": "How far the glow reaches into the screen from its edge or corner.",
+      "visibleWhen": { "key": "style", "notEquals": "Icon" }
+    },
+    {
+      "key": "gradientColor",
+      "type": "color",
+      "title": "Colour",
+      "default": "#FF0000",
+      "group": "Gradient",
+      "visibleWhen": { "key": "style", "notEquals": "Icon" }
+    },
+    {
+      "key": "gradientOpacity",
+      "type": "number",
+      "title": "Opacity (%)",
+      "default": 60,
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "group": "Gradient",
+      "description": "How strong the glow is at the edge.",
+      "visibleWhen": { "key": "style", "notEquals": "Icon" }
+    }
+  ],
+  "commands": [
+    { "id": "preview", "title": "Preview the indicator for 10 seconds" }
+  ]
+}
