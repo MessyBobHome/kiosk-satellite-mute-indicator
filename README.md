@@ -34,14 +34,14 @@ A [Kiosk Satellite](https://github.com/jxlarrea/kiosk-satellite) plugin that sho
 
 Mute Indicator is listed in [Community Plugins](https://kiosksatellite.com/plugins/). Use the button below to open it in your Kiosk Satellite and install it.
 
-[![Install in Kiosk Satellite](https://kiosksatellite.com/img/badges/plugin-add.svg)](https://kiosksatellite.com/redirect/plugin/?repository=YOUR_GITHUB_USER/kiosk-satellite-mute-indicator)
+[![Install in Kiosk Satellite](https://kiosksatellite.com/img/badges/plugin-add.svg)](https://kiosksatellite.com/redirect/plugin/?repository=MessyBobHome/kiosk-satellite-mute-indicator)
 
 Or search for `Mute Indicator` in **Settings > Plugin Manager > Browse plugins** in Kiosk Satellite.
 
 ### Manual
 
 1. Open **Settings > Plugin Manager** in Kiosk Satellite and turn on **Enable Plugins**.
-2. Choose **Add plugin**, paste `https://github.com/YOUR_GITHUB_USER/kiosk-satellite-mute-indicator` and choose **Preview**.
+2. Choose **Add plugin**, paste `https://github.com/MessyBobHome/kiosk-satellite-mute-indicator` and choose **Preview**.
 3. Review the plugin and choose **Trust and install**.
 
 New plugins start switched off, so turn it on afterwards. To try a local build instead, use **Plugin Manager > Developer Tools > Install from ZIP** with the ZIP from `dist/`. See [Build from source](#build-from-source).
